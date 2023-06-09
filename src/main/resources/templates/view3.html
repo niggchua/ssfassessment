@@ -12,13 +12,14 @@
 
 		<h2>Please Login</h2>
 
+		<form method="POST" data-th-action="@{/login}" data-th-object="${login}"></form>
 		<table>
 			<tr>
 				<td> 
 					<label for="username">Username:</label> 
 				</td>
 				<td>
-					<input type="text" id="username" size="30" 
+					<input type="text" id="username" size="30" data-th-field="${user}"
 							placeholder="Please type in your username" >
 				</td>
 			</tr>
@@ -27,14 +28,14 @@
 					<label for="password">Password:</label>
 				</td>
 				<td>
-					<input type="password" id="password" size="30" 
+					<input type="password" id="password" size="30" data-th-field="${pw}"
 							placeholder="Please type in your password">
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<button>Login</button>
+					<button type="submit">Login</button>
 				</td>
 			</tr>
 		</table>
