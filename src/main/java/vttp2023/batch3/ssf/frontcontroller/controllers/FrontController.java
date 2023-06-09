@@ -6,17 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import vttp2023.batch3.ssf.frontcontroller.model.Login;
 import vttp2023.batch3.ssf.frontcontroller.services.AuthenticationService;
 
-@Controller
+@RestController
 @RequestMapping(consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 public class FrontController {
 
@@ -26,16 +29,20 @@ public class FrontController {
     public AuthenticationService authService;
 
     @PostMapping(path="/login")
-    public String login(Model m , HttpSession sesssion, 
-            @Valid Login login, BindingResult result){
+    private String getUser(@RequestBody MultiValueMap<String, String> form, Model model){
 
-				
+		String username = form.getFirst("username");
+		String password = form.getFirst("password");
+		try {
+			AuthenticationService.authenticate(username, password);
 
-        if(result.hasErrors()){
-            return "view0";
-        }
-
+		
 	}
+
+
+		
+}
+	
 
 	@PostMapping(path="/login/authenticate")
 	public String postLogin(Model m, HttpSession session,
@@ -50,8 +57,8 @@ public class FrontController {
 	login.setAuthentication(true);
 	return "view2";
 
+	}
 }
-
 		
 		
 		
@@ -60,7 +67,7 @@ public class FrontController {
 
 
 	
-}
+
 //         List<ObjectError> errors = Login.validatePizzaOrder(login);
 //         if(!errors.isEmpty()){
 //             for(ObjectError e :errors)
