@@ -5,8 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import vttp2023.batch3.ssf.frontcontroller.model.Login;
-import vttp2023.batch3.ssf.frontcontroller.model.Password;
-import vttp2023.batch3.ssf.frontcontroller.model.Username;
 
 
 @Controller
